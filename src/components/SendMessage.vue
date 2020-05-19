@@ -4,7 +4,9 @@
             <div class="input-group-append">
                 <span class="input-group-text attach_btn"><i class="fas fa-paperclip"></i></span>
             </div>
-            <input type="text" name="" class="form-control type_msg" placeholder="Type your message..." v-model="contentMessage"/>
+            <b-form @submit="SendMessageHandler" class="form-control type_msg">
+                <b-form-input v-model="contentMessage" type="text" required placeholder="Type your message..." class="type_msg_input"/>
+            </b-form>
             <div class="input-group-append" v-on:click="SendMessageHandler">
                 <span class="input-group-text send_btn"><i class="fas fa-location-arrow"></i></span>
             </div>
@@ -26,10 +28,11 @@ export default {
         }
     },
     methods:{
-        SendMessageHandler: function(){
+        SendMessageHandler: function(evt){
             var self = this;
+            evt.preventDefault()
             if(self.contentMessage == "" || self.contentMessage == null) return;
-            var messageRefer = firebase.database.ref('messages').push();
+            var messageRefer = firebase.database.ref('chatRoom').push();
             messageRefer.set({
                 content: self.contentMessage,
                 from: self.currentUserId,

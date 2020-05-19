@@ -26,9 +26,9 @@
                         </ul>
                     </div>
                 </div>
-                <div class="card-body msg_card_body">
+                <div class="card-body msg_card_body" id="message-list">
                     <div v-for="item in listMessages" :key="item.key">
-                        <div class="d-flex justify-content-start mb-4" v-if="item.isMe">
+                        <div class="d-flex justify-content-start mb-4" v-if="!item.isMe">
                             <div class="img_cont_msg">
                                 <img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg" class="rounded-circle user_img_msg">
                             </div>
@@ -61,7 +61,7 @@ export default {
         var self = this;
         // check login
         this.$nextTick(function() {
-            var commentsRef = firebase.database.ref('messages/');
+            var commentsRef = firebase.database.ref('chatRoom/');
             commentsRef.on('child_added', function(data) {
                 var mesRaw = data.val();
                 self.listMessages.push({
