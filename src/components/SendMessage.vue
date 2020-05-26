@@ -5,7 +5,7 @@
                 <span class="input-group-text attach_btn"><i class="fas fa-paperclip"></i></span>
             </div>
             <b-form @submit="SendMessageHandler" class="form-control type_msg">
-                <b-form-input v-model="contentMessage" type="text" required placeholder="Type your message..." class="type_msg_input"/>
+                <b-form-input v-model="contentMessage" type="text" required v-bind:placeholder="currentUserId" class="type_msg_input"/>
             </b-form>
             <div class="input-group-append" v-on:click="SendMessageHandler">
                 <span class="input-group-text send_btn"><i class="fas fa-location-arrow"></i></span>
@@ -15,6 +15,7 @@
 </template>
 <script>
 import firebase from "../firebaseConfig"
+import Vuex from "vuex"
 
 export default {
     mounted: function(){
@@ -40,6 +41,10 @@ export default {
             })
         }
     },
-    props: ['currentUserId'],
+    computed: {
+            currentUserId() {
+                return this.$store.getters.currentUserId;
+            },
+        }
 }
 </script>

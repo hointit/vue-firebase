@@ -47,7 +47,7 @@
                         </div>
                     </div>
                 </div>
-                <SendMessage v-bind:current-user-id="currentUserId"/>
+                <SendMessage/>
             </div>
     </div>
 </template>
@@ -96,7 +96,11 @@ export default {
     components:{
         SendMessage
     },
-    props: ['currentUserId'],
+    computed: {
+            currentUserId() {
+                return this.$store.getters.currentUserId;
+            },
+        }
 };
 </script>
 

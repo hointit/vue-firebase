@@ -1,7 +1,7 @@
 <template>
   <div class="row justify-content-center h-100">
     <!-- <ChatList v-if="IsLogin"/> -->
-    <ShowMessage v-bind:current-user-id="CurrentUserId" v-if="IsLogin"/>
+    <ShowMessage v-if="IsLogin"/>
 
     <b-modal v-model="ShowModalLogin" hide-footer title="Login" no-close-on-esc no-close-on-backdrop hide-header-close>
       <b-form @submit="OnSubmit">
@@ -21,6 +21,7 @@
 import ShowMessage from "./components/ShowMessage";
 import ChatList from "./components/ChatList";
 import firebase from "./firebaseConfig"
+import Vuex from "vuex"
 
 export default {
   mounted: function() {
@@ -31,10 +32,11 @@ export default {
           if (user) {
             self.IsLogin = true;
             self.ShowModalLogin = false;
-            self.CurrentUserId = user.uid
+            self.$store.dispatch('setCurrentUserId', user.uid)
           } else {
             self.IsLogin = false;
             self.ShowModalLogin = true;
+            self.$store.dispatch('setCurrentUserId', "")
           }
       });
     });
@@ -49,7 +51,6 @@ export default {
           debugger
           self.IsLogin = true;
           self.ShowModalLogin = false;
-          // self.globalReadOnlyProperty = user.uid;
         })
         .catch(function(error) {
           var errorMessage = error.message;
