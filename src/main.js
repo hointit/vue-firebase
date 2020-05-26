@@ -18,15 +18,6 @@ Vue.use(IconsPlugin)
 
 Vue.config.productionTip = false
 
-var mixin = {
-  data: function () {
-    return {
-      message: 'hello',
-      foo: 'abc'
-    }
-  }
-}
-
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

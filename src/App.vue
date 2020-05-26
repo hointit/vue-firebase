@@ -1,6 +1,6 @@
 <template>
   <div class="row justify-content-center h-100">
-    <ChatList v-if="IsLogin"/>
+    <!-- <ChatList v-if="IsLogin"/> -->
     <ShowMessage v-bind:current-user-id="CurrentUserId" v-if="IsLogin"/>
 
     <b-modal v-model="ShowModalLogin" hide-footer title="Login" no-close-on-esc no-close-on-backdrop hide-header-close>

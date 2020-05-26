@@ -13,10 +13,8 @@
         </div>
     </div>
 </template>
-
 <script>
 import firebase from "../firebaseConfig"
-
 
 export default {
     mounted: function(){
@@ -34,9 +32,9 @@ export default {
             if(self.contentMessage == "" || self.contentMessage == null) return;
             var messageRefer = firebase.database.ref('chatRoom').push();
             messageRefer.set({
-                content: self.contentMessage,
-                from: self.currentUserId,
                 timeSend: Date.now(),
+                content: self.contentMessage,
+                from: self.currentUserId
             }).then(function(){
                 self.contentMessage = "";
             })
